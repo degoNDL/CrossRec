@@ -18,6 +18,7 @@ frontend/out/
 
 # Dados grandes / cache de grafo (recalculáveis, não versionar)
 data/cache/
+data/raw/
 data/*.graphml
 data/*.pkl
 

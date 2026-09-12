@@ -1,2 +1,6 @@
 # Dependências de produção do CrossRec.
 # Adicionadas incrementalmente a cada fase (nada é instalado antes de ser necessário).
+
+# Fase 1 — dados dos pontos turísticos
+requests==2.32.3
+pydantic==2.9.2
