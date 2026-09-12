@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Dados grandes / cache de grafo (recalculáveis, não versionar)
+data/cache/
+data/*.graphml
+data/*.pkl
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
