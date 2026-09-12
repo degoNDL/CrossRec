@@ -47,9 +47,9 @@ crossrec/
 Projeto em desenvolvimento por fases. Ver roadmap abaixo.
 
 - [x] Fase 0 — Fundação
-- [ ] Fase 1 — Dados dos pontos turísticos
-- [ ] Fase 2 — Grafo e matrizes de custo multimodal
-- [ ] Fase 3 — Otimizador (Held-Karp + janelas de tempo + Orienteering + meta-heurística)
+- [x] Fase 1 — Dados dos pontos turísticos
+- [x] Fase 2 — Grafo e matrizes de custo multimodal
+- [x] Fase 3 — Otimizador (Held-Karp + janelas de tempo + Orienteering + meta-heurística)
 - [ ] Fase 4 — API
 - [ ] Fase 5 — Camada de IA
 - [ ] Fase 6 — Frontend

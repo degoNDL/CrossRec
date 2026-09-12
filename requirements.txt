@@ -4,3 +4,12 @@
 # Fase 1 — dados dos pontos turísticos
 requests==2.32.3
 pydantic==2.9.2
+
+# Fase 2 — grafo de ruas e matrizes de custo multimodal
+osmnx==1.9.4
+networkx==3.3
+numpy==1.26.4
+scikit-learn==1.5.2
+
+# Fase 3 — otimizador (benchmark do GA contra o solver de referência)
+ortools==9.10.4067

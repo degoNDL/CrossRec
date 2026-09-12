@@ -21,6 +21,8 @@ data/cache/
 data/raw/
 data/*.graphml
 data/*.pkl
+# cache HTTP bruto do OSMnx (respostas da Overpass API), criado na raiz
+/cache/
 
 # OS / editor
 .DS_Store
