@@ -50,8 +50,8 @@ Projeto em desenvolvimento por fases. Ver roadmap abaixo.
 - [x] Fase 1 — Dados dos pontos turísticos
 - [x] Fase 2 — Grafo e matrizes de custo multimodal
 - [x] Fase 3 — Otimizador (Held-Karp + janelas de tempo + Orienteering + meta-heurística)
-- [ ] Fase 4 — API
-- [ ] Fase 5 — Camada de IA
+- [x] Fase 4 — API
+- [x] Fase 5 — Camada de IA
 - [ ] Fase 6 — Frontend
 - [ ] Fase 7 — Infra e deploy
 - [ ] Fase 8 — Qualidade e vitrine
@@ -65,6 +65,37 @@ python -m venv .venv
 pip install -r requirements-dev.txt
 pytest
 ```
+
+## Rodando a API
+
+```bash
+uvicorn api.main:app --reload
+```
+
+- `GET /pontos` — catálogo de pontos turísticos disponíveis.
+- `POST /roteiro` — calcula o roteiro otimizado. Corpo de exemplo:
+
+```json
+{
+  "pontos_ids": ["marco-zero", "paco-do-frevo", "mercado-sao-jose"],
+  "dia_semana": "quinta",
+  "hora_inicio_dia": "09:00",
+  "hora_fim_dia": "18:00",
+  "narrar": true
+}
+```
+
+- `POST /interpretar` — traduz um pedido em linguagem natural para ids do catálogo,
+  via IA (Groq). Não calcula o roteiro, só sugere os pontos:
+
+```json
+{"texto": "quero ver o centro histórico e terminar numa praia"}
+```
+
+Requer `GROQ_API_KEY` em `.env` (copie de `.env.example`) para `/interpretar` e para
+`/roteiro` com `"narrar": true`.
+
+Docs interativas (Swagger) em `http://127.0.0.1:8000/docs` com o servidor rodando.
 
 ## Rodando com Docker
 
