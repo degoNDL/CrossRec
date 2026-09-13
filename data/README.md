@@ -41,3 +41,26 @@ confirmar horário por telefone/Instagram oficial e então incluir seguindo o sc
 
 - Basílica e Convento do Carmo — tel. (81) 3224-3341
 - Concatedral São Pedro dos Clérigos — Instagram @concatedralsaopedrodosclerigos
+
+## Grafo de ruas e velocidade viária (Fase 2)
+
+`graph.py` baixa (via OSMnx) e cacheia em `cache/` duas redes de ruas do Recife: uma de
+caminhada e uma de carro. A rede de carro precisa de velocidade por via para estimar
+tempo de deslocamento; investigamos o portal de dados abertos do Recife
+(dados.recife.pe.gov.br) e ele **não tem** um dataset de limite de velocidade por
+segmento de via — só tem contagem de veículos por faixa de velocidade em pontos fixos
+de radar/lombada (dataset "Velocidade das Vias", mantido pela CTTU), que cobre apenas os
+cruzamentos monitorados, não a malha completa. Cruzar esse dataset por trecho de rua
+seria um esforço grande para um ganho de precisão pequeno no MVP.
+
+Por isso `graph.py` usa a tag `maxspeed` do OSM quando existe e, onde falta (a maioria
+das vias locais), imputa por uma tabela de velocidade por classe viária baseada no
+Código de Trânsito Brasileiro (Art. 61): via de trânsito rápido 80 km/h, arterial 60,
+coletora 40, local 30. Ver `HWY_SPEEDS_KMH` em `graph.py`.
+
+Possível refinamento futuro (Fase 9): cruzar o dataset de velocidade da CTTU
+(dados.recife.pe.gov.br/dataset/velocidade-das-vias-quantitativo-por-velocidade-media-2022)
+com o dataset de localização dos equipamentos
+(dados.recife.pe.gov.br/dataset/equipamentos-de-monitoramento-e-fiscalizacao-de-transito)
+para calibrar as velocidades por classe viária com dado real observado, em vez de só a
+tabela do CTB.

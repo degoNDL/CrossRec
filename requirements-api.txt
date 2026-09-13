@@ -1,0 +1,18 @@
+# Dependências mínimas para RODAR a API em produção — subconjunto de
+# requirements.txt. Deixa de fora o que só é usado por scripts de
+# desenvolvimento/dados (requests: só data/collect_overpass.py; ortools:
+# só optimizer/benchmark.py), o que evita instalar ~200MB do OR-Tools numa
+# imagem que nunca o executa.
+
+pydantic==2.9.2
+
+osmnx==1.9.4
+networkx==3.3
+numpy==1.26.4
+scikit-learn==1.5.2
+
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+groq==0.11.0
+python-dotenv==1.0.1

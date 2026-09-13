@@ -17,10 +17,17 @@ frontend/.next/
 frontend/out/
 
 # Dados grandes / cache de grafo (recalculáveis, não versionar)
-data/cache/
+data/cache/*
 data/raw/
 data/*.graphml
 data/*.pkl
+# Exceção: as matrizes já calculadas SÃO versionadas — pequenas (~20KB) e
+# evitam que o build de produção dependa de baixar o grafo do Recife via
+# Overpass API (lento e, na prática, instável) durante o deploy.
+!data/cache/matrix_walk.json
+!data/cache/matrix_drive.json
+# cache HTTP bruto do OSMnx (respostas da Overpass API), criado na raiz
+/cache/
 
 # OS / editor
 .DS_Store
