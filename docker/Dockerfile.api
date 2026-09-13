@@ -10,7 +10,8 @@ COPY ai/ ai/
 COPY data/ data/
 COPY optimizer/ optimizer/
 
-# Koyeb injeta PORT em runtime; 8000 é só o default para rodar localmente
+# O Render (e a maioria dos PaaS) injeta PORT em runtime; 8000 é só o default
+# para rodar localmente
 # (`docker run -p 8000:8000 ...`) sem precisar passar a variável.
 ENV PORT=8000
 EXPOSE 8000
