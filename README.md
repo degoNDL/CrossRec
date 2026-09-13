@@ -2,6 +2,10 @@
 
 Otimizador multimodal de rotas turísticas para o Recife.
 
+🔗 **[cross-rec.vercel.app](https://cross-rec.vercel.app)** — app no ar (backend em
+[crossrec.onrender.com](https://crossrec.onrender.com), free tier: a primeira requisição
+depois de um tempo sem uso pode demorar ~30-50s para "acordar" o serviço).
+
 ## O problema
 
 O turista sabe quais pontos do Recife quer visitar, mas não sabe em que ordem
@@ -27,7 +31,7 @@ meta-heurística e para um modo Orienteering quando nem tudo cabe no dia.
 | Frontend | Next.js |
 | Persistência | JSON local → PostgreSQL (Neon) |
 | Cache/fila | Upstash Redis |
-| Infra | Docker, GitHub Actions, Koyeb |
+| Infra | Docker, GitHub Actions, Render |
 
 ## Estrutura do repositório
 
@@ -120,7 +124,7 @@ conjunto de pontos curados mudar (ver [data/README.md](data/README.md)).
 
 ## Deploy
 
-Backend no [Koyeb](https://www.koyeb.com) (a partir de `docker/Dockerfile.api`) e frontend na
+Backend no [Render](https://render.com) (a partir de `docker/Dockerfile.api`) e frontend na
 [Vercel](https://vercel.com) (build nativo do Next.js, a partir de `frontend/`). Passo a passo
 em [DEPLOY.md](DEPLOY.md).
 
