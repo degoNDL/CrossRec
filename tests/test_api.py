@@ -11,6 +11,12 @@ def client():
         yield c
 
 
+def test_healthz(client):
+    resposta = client.get("/healthz")
+    assert resposta.status_code == 200
+    assert resposta.json() == {"status": "ok"}
+
+
 def test_listar_pontos(client):
     resposta = client.get("/pontos")
     assert resposta.status_code == 200
