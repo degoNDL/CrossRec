@@ -2,21 +2,32 @@
 
 Otimizador multimodal de rotas turísticas para o Recife.
 
-🔗 **[cross-rec.vercel.app](https://cross-rec.vercel.app)** — app no ar (backend em
-[crossrec.onrender.com](https://crossrec.onrender.com), free tier: a primeira requisição
-depois de um tempo sem uso pode demorar ~30-50s para "acordar" o serviço).
+🔗 **[cross-rec.vercel.app](https://cross-rec.vercel.app)** está no ar.
 
 ## O problema
 
-O turista sabe quais pontos do Recife quer visitar, mas não sabe em que ordem
-percorrê-los nem quando vale ir a pé ou de carro. O CrossRec recebe os pontos
-desejados e devolve a melhor ordem, o modo de transporte de cada trecho e os
-horários estimados do dia, respeitando o funcionamento de cada atração.
+O trânsito e o deslocamento no Recife podem ser bastante caóticos, e uma boa gestão de
+tempo e locomoção nesse contexto ajuda muito quem está de passagem pela cidade. O turista
+sabe quais pontos quer visitar, mas não sabe em que ordem percorrê-los nem quando vale ir
+a pé ou de carro. O CrossRec recebe os pontos desejados e devolve a melhor ordem, o modo
+de transporte de cada trecho e os horários estimados do dia, respeitando o funcionamento
+de cada atração.
 
-Por baixo é uma variação do problema do caixeiro viajante (TSP): um TSP
-multimodal com janela de tempo, resolvido de forma exata por programação
-dinâmica (Held-Karp) na escala de um turista, com fallback para
-meta-heurística e para um modo Orienteering quando nem tudo cabe no dia.
+Por baixo é uma variação do problema do caixeiro viajante (TSP): um TSP multimodal com
+janela de tempo, resolvido de forma exata por programação dinâmica (Held-Karp) na escala
+de um turista, com fallback para meta-heurística e para um modo Orienteering quando nem
+tudo cabe no dia.
+
+O propósito deste projeto pessoal é aprimorar conhecimentos próprios acerca de otimização
+combinatória, integração de modelos de linguagem em produtos reais e desenvolvimento
+full-stack (backend em Python/FastAPI, frontend em Next.js, geoprocessamento com OSMnx).
+
+Melhorias que estão no escopo futuro do projeto:
+
+- Adição de mais pontos turísticos ao catálogo curado
+- Preços de entrada de cada atração
+- Sugestão do melhor local para estacionar em cada parada feita de carro
+- Integração com previsão do tempo, para sugerir roteiros alternativos em dias de chuva
 
 ## Stack
 
@@ -32,34 +43,6 @@ meta-heurística e para um modo Orienteering quando nem tudo cabe no dia.
 | Persistência | JSON local → PostgreSQL (Neon) |
 | Cache/fila | Upstash Redis |
 | Infra | Docker, GitHub Actions, Render |
-
-## Estrutura do repositório
-
-```
-crossrec/
-  data/          # coleta e curadoria dos pontos e do grafo
-  optimizer/     # Held-Karp, meta-heurística, funções de custo
-  api/           # FastAPI
-  ai/            # integração com o LLM
-  frontend/      # Next.js
-  tests/         # testes automatizados
-  docker/        # Dockerfiles e compose
-```
-
-## Status
-
-Projeto em desenvolvimento por fases. Ver roadmap abaixo.
-
-- [x] Fase 0 — Fundação
-- [x] Fase 1 — Dados dos pontos turísticos
-- [x] Fase 2 — Grafo e matrizes de custo multimodal
-- [x] Fase 3 — Otimizador (Held-Karp + janelas de tempo + Orienteering + meta-heurística)
-- [x] Fase 4 — API
-- [x] Fase 5 — Camada de IA
-- [x] Fase 6 — Frontend
-- [ ] Fase 7 — Infra e deploy
-- [ ] Fase 8 — Qualidade e vitrine
-- [ ] Fase 9 — Evolução
 
 ## Rodando localmente
 
@@ -121,12 +104,6 @@ Sobe a API em `http://localhost:8000` e o frontend em `http://localhost:3000` ju
 matrizes de custo (`data/cache/matrix_*.json`) já vêm versionadas no repositório, então o
 build não depende de baixar o grafo de ruas do Recife — só é necessário reconstruí-lo se o
 conjunto de pontos curados mudar (ver [data/README.md](data/README.md)).
-
-## Deploy
-
-Backend no [Render](https://render.com) (a partir de `docker/Dockerfile.api`) e frontend na
-[Vercel](https://vercel.com) (build nativo do Next.js, a partir de `frontend/`). Passo a passo
-em [DEPLOY.md](DEPLOY.md).
 
 ## Licença
 
