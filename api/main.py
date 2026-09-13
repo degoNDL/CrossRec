@@ -87,6 +87,14 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     )
 
 
+@app.get("/healthz")
+def healthz():
+    """Liveness check para o load balancer/orquestrador (ex: Render). Não
+    toca no catálogo nem no CostModel — só confirma que o processo está de
+    pé, então tem que ser rápido e não pode falhar por causa de dado."""
+    return {"status": "ok"}
+
+
 @app.get("/pontos", response_model=list[TouristPoint])
 def listar_pontos():
     """Catálogo de pontos turísticos curados disponíveis para montar um roteiro."""
