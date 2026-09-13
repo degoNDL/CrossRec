@@ -52,7 +52,7 @@ Projeto em desenvolvimento por fases. Ver roadmap abaixo.
 - [x] Fase 3 — Otimizador (Held-Karp + janelas de tempo + Orienteering + meta-heurística)
 - [x] Fase 4 — API
 - [x] Fase 5 — Camada de IA
-- [ ] Fase 6 — Frontend
+- [x] Fase 6 — Frontend
 - [ ] Fase 7 — Infra e deploy
 - [ ] Fase 8 — Qualidade e vitrine
 - [ ] Fase 9 — Evolução
@@ -97,12 +97,32 @@ Requer `GROQ_API_KEY` em `.env` (copie de `.env.example`) para `/interpretar` e 
 
 Docs interativas (Swagger) em `http://127.0.0.1:8000/docs` com o servidor rodando.
 
+## Rodando o frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Abre em `http://localhost:3000` (precisa da API rodando em paralelo). Ver [frontend/README.md](frontend/README.md).
+
 ## Rodando com Docker
 
 ```bash
-docker build -f docker/Dockerfile -t crossrec .
-docker run --rm crossrec
+docker compose up --build
 ```
+
+Sobe a API em `http://localhost:8000` e o frontend em `http://localhost:3000` juntos. As
+matrizes de custo (`data/cache/matrix_*.json`) já vêm versionadas no repositório, então o
+build não depende de baixar o grafo de ruas do Recife — só é necessário reconstruí-lo se o
+conjunto de pontos curados mudar (ver [data/README.md](data/README.md)).
+
+## Deploy
+
+Backend no [Koyeb](https://www.koyeb.com) (a partir de `docker/Dockerfile.api`) e frontend na
+[Vercel](https://vercel.com) (build nativo do Next.js, a partir de `frontend/`). Passo a passo
+em [DEPLOY.md](DEPLOY.md).
 
 ## Licença
 

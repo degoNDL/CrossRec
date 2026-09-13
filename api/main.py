@@ -7,11 +7,13 @@ Uso local:
 
 import json
 import logging
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from ai.nl_to_points import traduzir_desejo
@@ -51,6 +53,17 @@ app = FastAPI(
     description="Otimizador multimodal de rotas turísticas para o Recife.",
     version="0.1.0",
     lifespan=lifespan,
+)
+
+# Origens do frontend que podem chamar a API. Em dev é sempre localhost;
+# em produção (Fase 7) a URL da Vercel entra via variável de ambiente —
+# nunca hardcoded, para não precisar alterar código a cada novo deploy.
+_origens_extra = [o for o in os.environ.get("CORS_ORIGINS", "").split(",") if o]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", *_origens_extra],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
 )
 
 
